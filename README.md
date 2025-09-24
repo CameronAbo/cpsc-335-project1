@@ -19,7 +19,7 @@ pip install -r requirements.txt
 3. Run Python using the venv's interpreter (example):
 
 ```bash
-./.venv/bin/python inertion_sort.py
+./.venv/bin/python driver.py
 ```
 
 Notes
