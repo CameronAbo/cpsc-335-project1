@@ -1,10 +1,4 @@
 # Project Python dependencies
 # Add Python packages here (install with `pip install -r requirements.txt`)
 
-# GitPython provides Python bindings to interact with Git repositories.
-# Note: This does NOT install the system `git` binary. Install Git via your
-# OS package manager (apt, dnf, brew, etc.) if it's not already present.
 GitPython>=3.1
-
-# Example additional deps:
-# pytest>=7.0
