@@ -9,13 +9,16 @@
 ###########################################################################################################
 
 import random
+import time
+from collections import namedtuple
 from bubble_sort import bubble_sort
 from insertion_sort import insertion_sort
 
-def generate_random_array(size, min=0, max=10000):
+
+def generate_random_array(size, max = 10, min = 0):
     """Generate an array of random integers."""
     
-    return [random.randint(min, max) for _ in range(size)]
+    return list(random.randint(min, max) for _ in range(size))
 
 def generate_sorted_array(size, order=0):
     """Generate a sorted array of integers. Order: 0 for ascending, 1 for descending."""
@@ -25,30 +28,54 @@ def generate_sorted_array(size, order=0):
 def main():
     """Main function to test sorting algorithms."""
     
-    array_size = 10
-    random_array = generate_random_array(array_size)
-    ascending_array = generate_sorted_array(array_size)
-    descending_array = generate_sorted_array(array_size, 1)
+    array_size = 1000
+
+    random = generate_random_array(array_size, array_size)
+    ascending = generate_sorted_array(array_size)
+    descending = generate_sorted_array(array_size, 1)
+    unsorted_arrays = [random, ascending, descending]
+
+    # print('Random Array: ', random)
+    # print('Ascending Array:', ascending)
+    # print('Descending Array: ', descending)
+    # Loop for bubble sort
+    for unsorted_array in unsorted_arrays:
+        # Set initial time before bubble sort
+        start_time = time.clock_gettime_ns(time.CLOCK_MONOTONIC)
+ 
+        # Test Bubble Sort
+        bubble_sorted_array, bubble_comparisons, bubble_swaps = bubble_sort(unsorted_array.copy())
+        
+        # Get final time after bubble sort
+        bubble_sort_time = time.clock_gettime_ns(time.CLOCK_MONOTONIC) - start_time
+
+        print("\nBubble Sort:")
+        #print("Sorted Array:", bubble_sorted_array)
+        print("Array Size = ", array_size)
+        print("Comparisons:", bubble_comparisons)
+        print("Swaps:", bubble_swaps)
+        print("Time in nanoseconds: ", bubble_sort_time)
     
-    print("Random Array:", random_array)
-    print("Sorted Array:", ascending_array)
-    print("Worst Case Array:", descending_array)
-    # Test Bubble Sort
-    bubble_sorted_array, bubble_comparisons, bubble_swaps = bubble_sort(random_array.copy())
-    print("\nBubble Sort:")
-    print("Sorted Array:", bubble_sorted_array)
-    print("Comparisons:", bubble_comparisons)
-    print("Swaps:", bubble_swaps)
-    
-    print("\nRandom Array:", random_array)
-    print("Sorted Array:", ascending_array)
-    print("Worst Case Array:", descending_array)
+    # print("\nRandom Array:", random)
+    # print("Sorted Array:", ascending)
+    # print("Worst Case Array:", descending)
     # Test Insertion Sort
-    insertion_sorted_array, insertion_comparisons, insertion_swaps = insertion_sort(random_array.copy())
-    print("\nInsertion Sort:")
-    print("Sorted Array:", insertion_sorted_array)
-    print("Comparisons:", insertion_comparisons)
-    print("Swaps:", insertion_swaps)
+    for unsorted_array in unsorted_arrays:
+        # Set initial time before bubble sort
+        start_time = time.clock_gettime_ns(time.CLOCK_MONOTONIC)
+ 
+        # Test Bubble Sort
+        bubble_sorted_array, bubble_comparisons, bubble_swaps = insertion_sort(unsorted_array.copy())
+        
+        # Get final time after bubble sort
+        bubble_sort_time = time.clock_gettime_ns(time.CLOCK_MONOTONIC) - start_time
+
+        print("\nInsertion Sort:")
+        #print("Sorted Array:", bubble_sorted_array)
+        print("Array Size = ", array_size)
+        print("Comparisons:", bubble_comparisons)
+        print("Swaps:", bubble_swaps)
+        print("Time in nanoseconds: ", bubble_sort_time)
 
 
 if __name__ == "__main__":
